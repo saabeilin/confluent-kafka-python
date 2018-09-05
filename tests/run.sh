@@ -26,7 +26,7 @@ run_native() {
         modes="${modes} --${mode}"
     done
     echo "Executing test modes $@"
-    python ${TEST_SOURCE}/../examples/integration_test.py ${modes} ${DOCKER_CONF}/testconf.json
+    python ${TEST_SOURCE}/../examples/integration_test.py ${modes} ${TEST_SOURCE}/testconf.json
 }
 
 if [ "$1" == "tox" ]; then

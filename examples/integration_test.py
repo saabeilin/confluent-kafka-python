@@ -45,7 +45,7 @@ except ImportError as e:
     with_progress = False
 
 # Default test conf location
-testconf = "tests/testconf.json"
+testconf_file = "tests/testconf.json"
 
 # Kafka bootstrap server(s)
 bootstrap_servers = None
@@ -1205,8 +1205,6 @@ def print_usage(exitcode, reason=None):
 
 if __name__ == '__main__':
     """Run test suites"""
-    if len(sys.argv) < 1:
-        print_usage(1, "test configuration required")
 
     if with_pympler:
         tr = tracker.SummaryTracker()
@@ -1225,7 +1223,10 @@ if __name__ == '__main__':
             print_usage(1, 'unknown option --' + opt)
         modes.append(opt)
 
-    with open(sys.argv.pop(1)) as f:
+    if len(sys.argv) == 2:
+        testconf_file = sys.argv.pop(1)
+
+    with open(testconf_file) as f:
         testconf = json.load(f)
         resolve_envs(testconf)
 
@@ -1238,7 +1239,7 @@ if __name__ == '__main__':
 
     if bootstrap_servers is None or topic is None:
         print_usage(1, "Properties bootstrap.servers and topic must be set. "
-                       "Use docker/conf/testconf.json as a template when creating a new conf file.")
+                       "Use {} as a template when creating a new conf file.".format(testconf_file))
 
     print('Using confluent_kafka module version %s (0x%x)' % confluent_kafka.version())
     print('Using librdkafka version %s (0x%x)' % confluent_kafka.libversion())
