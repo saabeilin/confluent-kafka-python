@@ -23,7 +23,7 @@ export PYTHONUNBUFFERED=1
 
 TEST_PATH=tests/kafkatest/tests/client
 
-LIBRDKAFKA_BRANCH=master
+LIBRDKAFKA_BRANCH=idempotence
 KAFKA_BRANCH=2.0
 REPO=https://github.com/apache/kafka.git
 
