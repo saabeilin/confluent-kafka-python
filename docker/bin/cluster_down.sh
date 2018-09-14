@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -eu
 
 DOCKER_BIN="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source ${DOCKER_BIN}/../.env
