@@ -9,12 +9,11 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\tools\\appveyor\\run_with_env.cmd"
 
 build_script:
-  - dir /s c:\python27
+#  - dir /s c:\python27
   - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python27\\include\\inttypes.h"
   - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python27\\include\\stdint.h"
   - nuget install librdkafka.redist -version %LIBRDKAFKA_NUGET_VERSION% -OutputDirectory dest
-  - dir /s dest
-  - xcopy dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\include C:\\python27\\include\\
+  - xcopy dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\include C:\\python27\\include\\librdkafka
   - xcopy dest/librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%/runtimes/win-x64/native/ C:\\python27\\dlls\\
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
