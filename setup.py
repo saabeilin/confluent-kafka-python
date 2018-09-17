@@ -14,7 +14,7 @@ else:
     avro = 'avro-python3'
 
 module = Extension('confluent_kafka.cimpl',
-                   libraries=['rdkafka'],
+                   libraries=['librdkafka'],
                    sources=['confluent_kafka/src/confluent_kafka.c',
                             'confluent_kafka/src/Producer.c',
                             'confluent_kafka/src/Consumer.c',
