@@ -1,5 +1,6 @@
 environment:
   global:
+    LIBRDKAFKA_NUGET_VERSION: 0.11.6-RC2
     CIBW_TEST_REQUIRES: pytest requests avro
     CIBW_TEST_COMMAND: "pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
     # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
@@ -8,15 +9,14 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\tools\\appveyor\\run_with_env.cmd"
 
 build_script:
-  - dir c:\python27
-  - dir c:\python27\include
+  - dir /s c:\python27
   - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python27\\include\\inttypes.h"
   - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python27\\include\\stdint.h"
-  - nuget install librdkafka.redist -OutputDirectory dest
-#  - pip install https://github.com/joerick/cibuildwheel/archive/master.zip
+  - nuget install librdkafka.redist -version %LIBRDKAFKA_NUGET_VERSION% -OutputDirectory dest
+  - dir /s dest
+  - xcopy dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\include C:\\python27\\include\\
+  - xcopy dest/librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%/runtimes/win-x64/native/ C:\\python27\\dlls\\
   - pip install cibuildwheel
-  - set INCLUDE=C:\\projects\\confluent-kafka-python\\dest\\librdkafka.redist.0.11.6-RC2\\build\\native\\include\\;%INCLUDE%
-  - set LIB=C:\\projects\\confluent-kafka-python\\dest\\librdkafka.redist.0.11.6-RC2\\runtimes\\win7-x64\\native;%LIB%
   - cibuildwheel --output-dir wheelhouse
 
 artifacts:
