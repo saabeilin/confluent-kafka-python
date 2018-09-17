@@ -18,6 +18,7 @@ build_script:
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x64\win-x64-Release\v120\librdkafka.lib C:\python27\libs\rdkafka.lib*
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x64\native\librdkafka.dll C:\python27\libs\rdkafka.dll*
   - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x64\native\* C:\python27\libs
+  - dumpbin /exports dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x64\win-x64-Release\v120\librdkafka.lib 
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
 
