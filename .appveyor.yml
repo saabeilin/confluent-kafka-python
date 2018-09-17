@@ -15,7 +15,7 @@ build_script:
   - nuget install librdkafka.redist -version %LIBRDKAFKA_NUGET_VERSION% -OutputDirectory dest
   - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\include\* C:\python27\include
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x64\win-x64-Release\v120\librdkafka.lib C:\python27\libs\rdkafka.lib*
-  - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x64\native\* C:\python27\dlls
+  - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x64\native\* C:\python27\libs
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
 
