@@ -10,6 +10,8 @@ environment:
 
 build_script:
 #  - dir /s c:\python27
+  - echo %CD%
+  - dir
   - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python27\\include\\inttypes.h"
   - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python27\\include\\stdint.h"
   - nuget install librdkafka.redist -version %LIBRDKAFKA_NUGET_VERSION% -OutputDirectory dest
@@ -17,6 +19,7 @@ build_script:
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib C:\python27\libs\librdkafka.lib*
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib C:\python27\libs\rdkafka.lib*
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\librdkafka.dll C:\python27\libs\rdkafka.dll*
+  - copy dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\librdkafka.dll librdkafka.dll
   - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\* C:\python27\libs
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
