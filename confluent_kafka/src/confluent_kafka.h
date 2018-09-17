@@ -18,7 +18,8 @@
 #include <structmember.h>
 #include <pythread.h>
 
-#define LIBRDKAFKA_EXPORTS
+#pragma comment(lib, "librdkafka.lib")
+//#define LIBRDKAFKA_EXPORTS
 #include <librdkafka/rdkafka.h>
 
 
