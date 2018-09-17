@@ -14,8 +14,8 @@ build_script:
   - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python27\\include\\stdint.h"
   - nuget install librdkafka.redist -version %LIBRDKAFKA_NUGET_VERSION% -OutputDirectory dest
   - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\include\* C:\python27\include
+  - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x64\win-x64-Release\v120\* C:\python27\libs
   - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x64\native\* C:\python27\dlls
-  - xcopy /I /F /S build\native\lib\win\x64\win-x64-Release\v120\* C:\python27\libs
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
 
