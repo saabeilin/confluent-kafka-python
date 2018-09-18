@@ -14,7 +14,6 @@ curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h 
 curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o stdint.h || exit /b 1
 
 for %%V in (27, 36, 37) do (
-    pypath=c:\Python%%~V
-    call windows-copy-librdkafka.bat %librdkafka_version% %pypath || exit /b 1
+    call windows-copy-librdkafka.bat %librdkafka_version% c:\Python%%~V || exit /b 1
 )
 
