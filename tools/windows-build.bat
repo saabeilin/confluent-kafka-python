@@ -51,7 +51,7 @@ for %%W in (wheelhouse\confluent_kafka-*cp27*win32.whl) do (
   python -c "from confluent_kafka import libversion ; print libversion()" || exit /b 1
   cd confluent-kafka
 
-  pytest --import-mode=append {project}\\tests || exit /b 1
+  pytest --import-mode=append {project}/tests || exit /b 1
   pip uninstall -y confluent_kafka || exit /b 1
 
 )
