@@ -10,8 +10,11 @@ copy inttypes.h %pypath%-x64\include\ || exit /b 1
 
 dir /s dest
 
-findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\rdkafka.h > %pypath%\include\rdkafka.h
-findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\rdkafka.h > %pypath%-x64\include\rdkafka.h
+md %pypath%\include\librdkafka
+findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\librdkafka\rdkafka.h > %pypath%\include\librdkafka\rdkafka.h
+
+md %pypath%-x64\include\librdkafka
+findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\librdkafka\rdkafka.h > %pypath%-x64\include\librdkafka\rdkafka.h
 
 rem echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%\include || exit /b 1
 rem echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%-x64\include || exit /b 1
