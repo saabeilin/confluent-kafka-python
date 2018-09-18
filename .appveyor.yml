@@ -30,7 +30,7 @@ build_script:
   - delocate-wheel  -w delocated_wheel wheelhouse\*.whl
   - dir delocated_wheel
   - pip install delocated_wheel/*.whl
-  - %xCIBW_TEST_COMMAND%
+  - echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
 
 artifacts:
   - path: "wheelhouse\\*.whl"
