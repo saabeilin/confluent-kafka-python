@@ -47,10 +47,11 @@ for %%W in (wheelhouse\confluent_kafka-*cp27*win32.whl) do (
   python -c "import struct; print(struct.calcsize('P') * 8)"
   7z l %%~W
   pip install %%~W || exit /b 1
+  cd ..
   python -c "from confluent_kafka import libversion ; print libversion()" || exit /b 1
-  pip uninstall -y confluent_kafka
 
   pytest --import-mode=append || exit /b 1
-  pip uninstall confluent_kafka || exit /b 1
+  pip uninstall -y confluent_kafka || exit /b 1
+  cd confluent-kafka
 )
 
