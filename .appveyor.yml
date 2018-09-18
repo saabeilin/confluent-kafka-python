@@ -14,3 +14,17 @@ build_script:
 artifacts:
   - path: "wheelhouse\\*.whl"
     name: Wheels
+
+deploy:
+- provider: S3
+  access_key_id:
+    secure: t+Xo4x1mYVbqzvUDlnuMgFGp8LjQJNOfsDUAMxBsVH4=
+  secret_access_key:
+    secure: SNziQPPJs4poCHM7dk6OxufUYcGQhMWiNPx6Y1y6DYuWGjPc3K0APGeousLHsbLv
+  region: us-west-1
+  bucket: librdkafka-ci-packages
+  folder: confluent-kafka-python/p-confluent-kafka-python__bld-appveyor__plat-windows__arch-$(platform)__bldtype-$(configuration)__tag-$(APPVEYOR_REPO_TAG_NAME)__sha-$(APPVEYOR_REPO_COMMIT)__bid-$(APPVEYOR_BUILD_ID)
+  artifact: /wheelhouse\/.*\.whl/
+  max_error_retry: 3
+  on:
+    APPVEYOR_REPO_TAG: true
