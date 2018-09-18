@@ -43,10 +43,12 @@ for %%W in (..\..\wheelhouse\*amd64.whl) do (
 cd ..\..
 
 
-pip install wheelhouse/confluent_kafka-*cp27*win32.whl || exit /b 1
+for %W in (wheelhouse\confluent_kafka-*cp27*win32.whl) do (
+  pip install %%W || exit /b 1
+  python -c "from confluent_kafka import libversion ; print libversion()" || exit /b 1
+  pip uninstall -y confluent_kafka
 
-python -c "from confluent_kafka import libversion ; print libversion()" || exit /b 1
-
-pytest --import-mode=append || exit /b 1
-pip uninstall confluent_kafka || exit /b 1
+  pytest --import-mode=append || exit /b 1
+  pip uninstall confluent_kafka || exit /b 1
+)
 
