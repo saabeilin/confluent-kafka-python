@@ -21,7 +21,8 @@ build_script:
   - dir wheelhouse
   - dir c:\python27
   - dir c:\python27\scripts
-  - python c:\python27\Scripts\delocate-listdeps wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
+  - unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
+  #- python c:\python27\Scripts\delocate-listdeps wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - md delocated_wheel
   - python c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - dir delocated_wheel
