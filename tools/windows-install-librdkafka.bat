@@ -1,41 +1,29 @@
+rem Download and install librdkafka.redist from NuGet.
+rem
+rem For each available Python version copy headers and libs.
+
 echo on
 set librdkafka_version=%1
-set python_version=%2
+set outdir=%2
 
-nuget install librdkafka.redist -version %librdkafka_version% -OutputDirectory dest
-
-rem Copy files for x86 and x64 respectively
-
-rem
-rem x86
-rem
-
-rem where /r c:\ inttypes.h
-
-curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python%python_version%\\include\\inttypes.h
-curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python%python_version%\\include\\stdint.h
+nuget install librdkafka.redist -version %librdkafka_version% -OutputDirectory %outdir%
 
 
-xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* C:\python%python_version%\include
+rem Download required (but missing) system includes
+curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o inttypes.h
+curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o stdint.h
 
-xcopy /F dest\librdkafka.redist.%librdkafka_version%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib C:\python%python_version%\libs\librdkafka.lib*
-xcopy /F dest\librdkafka.redist.%librdkafka_version%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib C:\python%python_version%\libs\rdkafka.lib*
-xcopy /F dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x86\native\librdkafka.dll C:\python%python_version%\libs\rdkafka.dll*
-rem xcopy /F dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x86\native\*.dll %CD%
-xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x86\native\* C:\python%python_version%\libs
+for %%V in (27, 36, 37) do (
+    set pypath=c:\Python%%~V
+    copy /I /F /S inttypes.h stdint.h %pypath%\include\*
+    xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%\include
 
+    rem Copy x86 libs and dlls
+    xcopy /F dest\librdkafka.redist.%librdkafka_version%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib %pypath%\libs\*
+    xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x86\native\* %pypath%\libs
 
-rem
-rem x64
-rem
+    rem Copy x64 libs and dlls
+    xcopy /F dest\librdkafka.redist.%librdkafka_version%\build\native\lib\win\x64\win-x64-Release\v120\librdkafka.lib %pypath%-x64\libs\*
+    xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x64\native\* %pypath%-x64\libs
+)
 
-copy c:\python%python_version%\include\inttypes.h c:\python%python_version%-x64\include\
-copy c:\python%python_version%\include\stdint.h c:\python%python_version%-x64\include\
-
-xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* C:\python%python_version%-x64\include
-
-xcopy /F dest\librdkafka.redist.%librdkafka_version%\build\native\lib\win\x64\win-x64-Release\v120\librdkafka.lib C:\python%python_version%-x64\libs\librdkafka.lib*
-xcopy /F dest\librdkafka.redist.%librdkafka_version%\build\native\lib\win\x64\win-x64-Release\v120\librdkafka.lib C:\python%python_version%-x64\libs\rdkafka.lib*
-xcopy /F dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x64\native\librdkafka.dll C:\python%python_version%-x64\libs\rdkafka.dll*
-rem xcopy /F dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x64\native\*.dll %CD%
-xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\runtimes\win-x64\native\* C:\python%python_version%-x64\libs
