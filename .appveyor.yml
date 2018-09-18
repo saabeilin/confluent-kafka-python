@@ -20,7 +20,7 @@ build_script:
   - cibuildwheel --output-dir wheelhouse
   - dir wheelhouse
   - dir c:\python27
-  - dir c:\python27\bin
+  - dir c:\python27\scripts
   - c:\python27\Scripts\delocate-listdeps wheelhouse\*.whl
   - md delocated_wheel
   - c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse\*32.whl
