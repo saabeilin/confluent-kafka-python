@@ -10,11 +10,11 @@ dir c:\python27\scripts
 unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
 unzip wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka/cimpl.pyd
 dumpbin /exports confluent_kafka\cimpl.pyd
-#md confluent_kafka\.libs
+rem md confluent_kafka\.libs
 rem copy dest\librdkafka.redist.%LIBRDKAFKA_VERSION%\runtimes\win-x86\native\*.dll confluent_kafka\
 rem 7z a -r wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka\*.dll
-xcopy /I /F /S dest confluent_kafka
-7z a -r wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl dest
+xcopy /I /F /S dest confluent_kafka\dest
+7z a -r wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka\dest
 unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
 
 pip install wheelhouse/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
