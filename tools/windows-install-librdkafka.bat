@@ -10,11 +10,11 @@ nuget install librdkafka.redist -version %librdkafka_version% -OutputDirectory %
 
 
 rem Download required (but missing) system includes
-curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o inttypes.h
-curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o stdint.h
+curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o inttypes.h || exit /b 1
+curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o stdint.h || exit /b 1
 
 for %%V in (27, 36, 37) do (
     pypath=c:\Python%%~V
-    call windows-copy-librdkafka.bat %librdkafka_version% %pypath
+    call windows-copy-librdkafka.bat %librdkafka_version% %pypath || exit /b 1
 )
 
