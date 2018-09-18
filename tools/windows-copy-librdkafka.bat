@@ -3,7 +3,8 @@ rem Copy librdkafka headers and libs to Python paths for later use when building
 set librdkafka_version=%1
 set pypath=%2
 
-xcopy /I /F /S inttypes.h stdint.h %pypath%\include\* || exit /b 1
+copy stdint.h %pypath%\include\ || exit /b 1
+copy inttypes.h %pypath%\include\ || exit /b 1
 echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%\include || exit /b 1
 
 rem Copy x86 libs and dlls
