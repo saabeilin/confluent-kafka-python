@@ -23,6 +23,10 @@
 
 #ifdef _MSC_VER
 /* Windows */
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
 #define CFL_PRId64 I64
 #define CFL_PRId32 I32
 
