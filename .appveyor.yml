@@ -13,15 +13,10 @@ build_script:
   - echo %CD%
   - dir
   - set
-  - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python27-x64\\include\\inttypes.h"
-  - "curl https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python27-x64\\include\\stdint.h"
-  - nuget install librdkafka.redist -version %LIBRDKAFKA_NUGET_VERSION% -OutputDirectory dest
-  - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\include\* C:\python27-x64\include
-  - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib C:\python27-x64\libs\librdkafka.lib*
-  - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib C:\python27-x64\libs\rdkafka.lib*
-  - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\librdkafka.dll C:\python27-x64\libs\rdkafka.dll*
-  - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\*.dll %CD%
-  - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\* C:\python27-x64\libs
+  # FIXME: use another source
+  - "curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python27-x64\\include\\inttypes.h"
+  - "curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python27-x64\\include\\stdint.h"
+  - tools\windows-install-librdkafka.bat %LIBRDKAFKA_NUGET_VERSION% 27
   - pip install wheel delocate
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
