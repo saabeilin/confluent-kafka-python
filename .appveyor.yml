@@ -21,13 +21,11 @@ build_script:
   - dir wheelhouse
   - dir c:\python27
   - dir c:\python27\scripts
-  - python c:\python27\Scripts\delocate-listdeps wheelhouse/*.whl
+  - python c:\python27\Scripts\delocate-listdeps wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - md delocated_wheel
-  - python c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse/*32.whl
+  - python c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - dir delocated_wheel
-  - python c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse/*64.whl
-  - dir delocated_wheel
-  - pip install delocated_wheel/*32.whl
+  - pip install delocated_wheel/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
 
 artifacts:
