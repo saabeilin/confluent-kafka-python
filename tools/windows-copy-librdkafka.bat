@@ -8,6 +8,8 @@ copy inttypes.h %pypath%\include\ || exit /b 1
 copy stdint.h %pypath%-x64\include\ || exit /b 1
 copy inttypes.h %pypath%-x64\include\ || exit /b 1
 
+dir /s dest
+
 findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\rdkafka.h > %pypath%\include\rdkafka.h
 findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\rdkafka.h > %pypath%-x64\include\rdkafka.h
 
