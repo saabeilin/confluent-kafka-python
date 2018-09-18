@@ -21,6 +21,7 @@
 //#pragma comment(lib, "librdkafka.lib")
 //#define LIBRDKAFKA_EXPORTS
 //#define LIBRDKAFKA_STATICLIB
+#include <stdint.h>
 #include <librdkafka/rdkafka.h>
 
 
