@@ -20,11 +20,11 @@ build_script:
   - cibuildwheel --output-dir wheelhouse
   - dir wheelhouse
   - dir c:\python27\bin
-  - delocate-listdeps wheelhouse\*.whl
+  - c:\python27\Scripts\delocate-listdeps wheelhouse\*.whl
   - md delocated_wheel
-  - delocate-wheel -w delocated_wheel wheelhouse\*32.whl
+  - c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse\*32.whl
   - dir delocated_wheel
-  - delocate-wheel -w delocated_wheel wheelhouse\*64.whl
+  - c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse\*64.whl
   - dir delocated_wheel
   - pip install delocated_wheel/*32.whl
   - echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
