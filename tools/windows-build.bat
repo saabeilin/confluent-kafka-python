@@ -1,3 +1,4 @@
+echo on
 set PATH=%PATH%;c:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin
 set
 dumpbin /?
@@ -10,6 +11,7 @@ dir c:\python27\scripts
 unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
 unzip wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka/cimpl.pyd
 dumpbin /exports confluent_kafka\cimpl.pyd
+timeout 2
 rem md confluent_kafka\.libs
 rem copy dest\librdkafka.redist.%LIBRDKAFKA_VERSION%\runtimes\win-x86\native\*.dll confluent_kafka\
 rem 7z a -r wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka\*.dll

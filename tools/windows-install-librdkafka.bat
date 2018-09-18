@@ -1,4 +1,4 @@
-
+echo on
 set librdkafka_version=%1
 set python_version=%2
 
