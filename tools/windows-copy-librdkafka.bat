@@ -5,7 +5,11 @@ set pypath=%2
 
 copy stdint.h %pypath%\include\ || exit /b 1
 copy inttypes.h %pypath%\include\ || exit /b 1
+copy stdint.h %pypath%-x64\include\ || exit /b 1
+copy inttypes.h %pypath%-x64\include\ || exit /b 1
+
 echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%\include || exit /b 1
+echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%-x64\include || exit /b 1
 
 rem Copy x86 libs and dlls
 xcopy /F dest\librdkafka.redist.%librdkafka_version%\build\native\lib\win\x86\win-x86-Release\v120\librdkafka.lib %pypath%\libs\* || exit /b 1
