@@ -5,8 +5,8 @@ set pypath=%2
 
 copy stdint.h %pypath%\include\ || exit /b 1
 copy inttypes.h %pypath%\include\ || exit /b 1
-copy stdint.h %pypath%-x64\include\ || exit /b 1
-copy inttypes.h %pypath%-x64\include\ || exit /b 1
+rem copy stdint.h %pypath%-x64\include\ || exit /b 1
+rem copy inttypes.h %pypath%-x64\include\ || exit /b 1
 
 echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%\include || exit /b 1
 echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%-x64\include || exit /b 1
