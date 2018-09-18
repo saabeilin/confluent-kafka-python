@@ -747,7 +747,7 @@ static PyObject *Consumer_seek (Handle *self, PyObject *args, PyObject *kwargs) 
 
         if (err) {
                 cfl_PyErr_Format(err,
-                                 "Failed to seek to offset %"PRId64": %s",
+                                 "Failed to seek to offset %"CFL_PRId64": %s",
                                  tp->offset, rd_kafka_err2str(err));
                 return NULL;
         }

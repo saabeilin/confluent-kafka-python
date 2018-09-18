@@ -756,7 +756,7 @@ static PyObject *TopicPartition_str0 (TopicPartition *self) {
 	PyObject *ret;
 	char offset_str[40];
 
-	snprintf(offset_str, sizeof(offset_str), "%"PRId64"", self->offset);
+	snprintf(offset_str, sizeof(offset_str), "%"CFL_PRId64"", self->offset);
 
         if (self->error != Py_None) {
                 errstr = cfl_PyObject_Unistr(self->error);
@@ -764,7 +764,7 @@ static PyObject *TopicPartition_str0 (TopicPartition *self) {
         }
 
 	ret = cfl_PyUnistr(
-		_FromFormat("TopicPartition{topic=%s,partition=%"PRId32
+		_FromFormat("TopicPartition{topic=%s,partition=%"CFL_PRId32
 			    ",offset=%s,error=%s}",
 			    self->topic, self->partition,
 			    offset_str,
