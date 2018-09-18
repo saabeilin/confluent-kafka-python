@@ -1,8 +1,8 @@
 environment:
   global:
     LIBRDKAFKA_NUGET_VERSION: 0.11.6-RC2
-    CIBW_TEST_REQUIRES: pytest requests avro
-    CIBW_TEST_COMMAND: "echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
+    xCIBW_TEST_REQUIRES: pytest requests avro
+    xCIBW_TEST_COMMAND: "echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
     # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
     # /E:ON and /V:ON options are not enabled in the batch script intepreter
     # See: http://stackoverflow.com/a/13751649/163740
@@ -21,8 +21,16 @@ build_script:
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\librdkafka.dll C:\python27\libs\rdkafka.dll*
   - xcopy /F dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\*.dll %CD%
   - xcopy /I /F /S dest\librdkafka.redist.%LIBRDKAFKA_NUGET_VERSION%\runtimes\win-x86\native\* C:\python27\libs
+  - pip install wheel delocate
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
+  - dir wheelhouse
+  - delocate-listdeps wheelhouse\*.whl
+  - md delocated_wheel
+  - delocate-wheel  -w delocated_wheel wheelhouse\*.whl
+  - dir delocated_wheel
+  - pip install delocated_wheel/*.whl
+  - %xCIBW_TEST_COMMAND%
 
 artifacts:
   - path: "wheelhouse\\*.whl"
