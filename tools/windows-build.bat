@@ -2,8 +2,7 @@ set PATH=%PATH%;c:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin
 set
 dumpbin /?
 tools\windows-install-librdkafka.bat %LIBRDKAFKA_NUGET_VERSION% 27
-rem pip install wheel delocate
-rem pip show -f delocate
+echo hi
 pip install cibuildwheel
 cibuildwheel --output-dir wheelhouse
 dir wheelhouse
