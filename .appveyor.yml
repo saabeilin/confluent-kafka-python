@@ -28,7 +28,7 @@ build_script:
   - unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   #- python c:\python27\Scripts\delocate-listdeps wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - pip install wheelhouse/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
-  - echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
+  - python c:\python27\scripts\pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
 
 artifacts:
   - path: "wheelhouse\\*.whl"
