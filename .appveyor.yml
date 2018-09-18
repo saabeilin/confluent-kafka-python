@@ -21,11 +21,11 @@ build_script:
   - dir wheelhouse
   - dir c:\python27
   - dir c:\python27\scripts
-  - c:\python27\Scripts\delocate-listdeps wheelhouse\*.whl
+  - python c:\python27\Scripts\delocate-listdeps wheelhouse\*.whl
   - md delocated_wheel
-  - c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse\*32.whl
+  - python c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse\*32.whl
   - dir delocated_wheel
-  - c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse\*64.whl
+  - python c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse\*64.whl
   - dir delocated_wheel
   - pip install delocated_wheel/*32.whl
   - echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
