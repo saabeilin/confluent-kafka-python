@@ -13,9 +13,6 @@ build_script:
   - echo %CD%
   - dir
   - set
-  # FIXME: use another source
-  - "curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python27-x64\\include\\inttypes.h"
-  - "curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python27-x64\\include\\stdint.h"
   - tools\windows-install-librdkafka.bat %LIBRDKAFKA_NUGET_VERSION% 27
   - pip install wheel delocate
   - pip install cibuildwheel
