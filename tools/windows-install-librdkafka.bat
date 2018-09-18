@@ -10,7 +10,7 @@ rem
 rem x86
 rem
 
-where /r c:\ inttypes.h
+rem where /r c:\ inttypes.h
 
 curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/inttypes.h -o c:\\python%python_version%\\include\\inttypes.h
 curl -s https://raw.githubusercontent.com/chemeris/msinttypes/master/stdint.h -o c:\\python%python_version%\\include\\stdint.h
