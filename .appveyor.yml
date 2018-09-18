@@ -22,11 +22,13 @@ build_script:
   - dir c:\python27
   - dir c:\python27\scripts
   - unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
+  - md confluent_kafka
+  - md confluent_kafka\.libs
+  - copy dest\librdkafka.redist.%LIBRDKAFKA_VERSION%\runtimes\win-x86\native\*.dll confluent_kafka\.libs
+  - zip -ur wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka\.libs
+  - unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   #- python c:\python27\Scripts\delocate-listdeps wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
-  - md delocated_wheel
-  - python c:\python27\Scripts\delocate-wheel -w delocated_wheel wheelhouse/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
-  - dir delocated_wheel
-  - pip install delocated_wheel/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
+  - pip install wheelhouse/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
 
 artifacts:
