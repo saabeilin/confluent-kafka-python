@@ -23,6 +23,7 @@ build_script:
   - dir c:\python27\scripts
   - unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - unzip wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka/cimpl.pyd
+  - where dumpbin.exe c:\
   - dumpbin /exports confluent_kafka\cimpl.pyd
   - md confluent_kafka\.libs
   - copy dest\librdkafka.redist.%LIBRDKAFKA_VERSION%\runtimes\win-x86\native\*.dll confluent_kafka\
