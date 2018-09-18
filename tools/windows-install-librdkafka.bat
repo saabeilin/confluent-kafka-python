@@ -17,6 +17,8 @@ setlocal enabledelayedexpansion
 for %%V in (27, 36, 37) do (
     pypath=c:\Python%%~V
     echo pypath: !pypath!
+    echo pyp2: %pypath%
+    echo pyp3: %%pypath%%
     copy /I /F /S inttypes.h stdint.h !pypath!\include\*
     echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* !pypath!\include
 
