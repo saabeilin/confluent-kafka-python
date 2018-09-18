@@ -9,6 +9,7 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\tools\\appveyor\\run_with_env.cmd"
 
 build_script:
+  - dir /s c:\Python37
   - tools/windows-build.bat
 
 artifacts:
