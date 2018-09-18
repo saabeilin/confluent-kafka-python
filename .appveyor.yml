@@ -23,8 +23,8 @@ build_script:
   - dir c:\python27\scripts
   - unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - md confluent_kafka\.libs
-  - copy dest\librdkafka.redist.%LIBRDKAFKA_VERSION%\runtimes\win-x86\native\*.dll confluent_kafka\.libs
-  - 7z a -r wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka\.libs
+  - copy dest\librdkafka.redist.%LIBRDKAFKA_VERSION%\runtimes\win-x86\native\*.dll confluent_kafka\
+  - 7z a -r wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl confluent_kafka\*.dll
   - unzip -l wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   #- python c:\python27\Scripts\delocate-listdeps wheelhouse\confluent_kafka-0.11.5-cp27-cp27m-win32.whl
   - pip install wheelhouse/confluent_kafka-0.11.5-cp27-cp27m-win32.whl
