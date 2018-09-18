@@ -15,14 +15,18 @@ build_script:
   - set
   - tools\windows-install-librdkafka.bat %LIBRDKAFKA_NUGET_VERSION% 27
   - pip install wheel delocate
+  - pip show -f delocate
   - pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
   - dir wheelhouse
+  - dir c:\python27\bin
   - delocate-listdeps wheelhouse\*.whl
   - md delocated_wheel
-  - delocate-wheel  -w delocated_wheel wheelhouse\*.whl
+  - delocate-wheel -w delocated_wheel wheelhouse\*32.whl
   - dir delocated_wheel
-  - pip install delocated_wheel/*.whl
+  - delocate-wheel -w delocated_wheel wheelhouse\*64.whl
+  - dir delocated_wheel
+  - pip install delocated_wheel/*32.whl
   - echo %CD% & dir & pytest --import-mode=append --ignore={project}\\tests\\avro {project}\\tests"
 
 artifacts:
