@@ -10,7 +10,7 @@ call tools\windows-install-librdkafka.bat %LIBRDKAFKA_NUGET_VERSION% dest || exi
 pip install cibuildwheel || exit /b 1
 
 rem Build wheels (without tests)
-cibuildwheel --output-dir wheelhouse || exit /b 1
+cibuildwheel --platform windows --output-dir wheelhouse || exit /b 1
 
 dir wheelhouse
 
