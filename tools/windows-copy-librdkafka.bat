@@ -13,7 +13,7 @@ if exist %pypath% (
 )
 
 if exist %pypath64% (
-	if "%pypath%" == "c:\Python27-x64" (
+	if "%pypath64%" == "c:\Python27-x64" (
 		copy stdint.h %pypath64%\include\ || exit /b 1
 		copy inttypes.h %pypath64%\include\ || exit /b 1
 	)
