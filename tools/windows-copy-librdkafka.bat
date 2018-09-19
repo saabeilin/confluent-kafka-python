@@ -5,7 +5,8 @@ set pypath=%2
 set pypath64=%pypath%-64
 
 if exist %pypath% (
-	if "%pypath%" == "C:\Python27" (
+	if "%pypath%" == "c:\Python27" (
+		echo Installing stdint, et.al
 		copy stdint.h %pypath%\include\ || exit /b 1
 		copy inttypes.h %pypath%\include\ || exit /b 1
 	)
