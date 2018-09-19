@@ -2,7 +2,7 @@ rem Copy librdkafka headers and libs to Python paths for later use when building
 
 set librdkafka_version=%1
 set pypath=%2
-set pypath64=%pypath%-64
+set pypath64=%pypath%-x64
 
 if exist %pypath% (
 	if "%pypath%" == "c:\Python27" (
