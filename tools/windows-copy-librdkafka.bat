@@ -4,9 +4,9 @@ set librdkafka_version=%1
 set pypath=%2
 set pypath64=%pypath%-x64
 
+rem stdint.h and inttypes.h are only needed on Python2.7 which is using an older MSVC toolchain.
 if exist %pypath% (
 	if "%pypath%" == "c:\Python27" (
-		echo Installing stdint, et.al
 		copy stdint.h %pypath%\include\ || exit /b 1
 		copy inttypes.h %pypath%\include\ || exit /b 1
 	)
@@ -19,6 +19,7 @@ if exist %pypath64% (
 	)
 )
 
+rem Remove inttypes.h include from rdkafka.h until it has been removed from upstream
 if exist %pypath% (
 	md %pypath%\include\librdkafka
 	findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\librdkafka\rdkafka.h > %pypath%\include\librdkafka\rdkafka.h
@@ -28,8 +29,6 @@ if exist %pypath64% (
 	md %pypath64%\include\librdkafka
 	findstr /V inttypes.h dest\librdkafka.redist.%librdkafka_version%\build\native\include\librdkafka\rdkafka.h > %pypath64%\include\librdkafka\rdkafka.h
 )
-rem echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath%\include || exit /b 1
-rem echo A|xcopy /I /F /S dest\librdkafka.redist.%librdkafka_version%\build\native\include\* %pypath64%\include || exit /b 1
 
 rem Copy x86 libs and dlls
 if exist %pypath% (
