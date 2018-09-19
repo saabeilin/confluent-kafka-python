@@ -5,13 +5,17 @@ set pypath=%2
 set pypath64=%pypath%-64
 
 if exist %pypath% (
-	rem copy stdint.h %pypath%\include\ || exit /b 1
-	rem copy inttypes.h %pypath%\include\ || exit /b 1
+	if "%pypath%" == "C:\Python27" (
+		copy stdint.h %pypath%\include\ || exit /b 1
+		copy inttypes.h %pypath%\include\ || exit /b 1
+	)
 )
 
 if exist %pypath64% (
-	rem copy stdint.h %pypath64%\include\ || exit /b 1
-	rem copy inttypes.h %pypath64%\include\ || exit /b 1
+	if "%pypath%" == "C:\Python27-x64" (
+		copy stdint.h %pypath64%\include\ || exit /b 1
+		copy inttypes.h %pypath64%\include\ || exit /b 1
+	)
 )
 
 if exist %pypath% (
